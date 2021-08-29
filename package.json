@@ -31,7 +31,6 @@
     "build": "react-scripts build",
     "dev": "concurrently \"npm start\" \"npm:electron\"",
     "electron": "wait-on tcp:3000 && electron-forge start",
-    "el": "electron .",
     "package": "react-scripts build && electron-forge package",
     "make": "react-scripts build && electron-forge make"
   },
