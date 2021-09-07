@@ -1,6 +1,6 @@
 {
   "name": "pbfapp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "electron app",
   "private": true,
   "author": "Andrei",
@@ -30,9 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "dev": "concurrently \"npm start\" \"npm:electron\"",
-    "electron": "wait-on tcp:3000 && electron-forge start",
-    "package": "react-scripts build && electron-forge package",
-    "make": "react-scripts build && electron-forge make"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {
     "extends": [
@@ -53,44 +53,27 @@
     ]
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.59",
-    "@electron-forge/maker-deb": "^6.0.0-beta.59",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.59",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.59",
-    "@electron-forge/maker-zip": "^6.0.0-beta.59",
     "@types/styled-components": "^5.1.12",
     "concurrently": "^6.2.1",
     "electron": "^13.2.3",
+    "electron-builder": "^22.11.7",
     "wait-on": "^6.0.0"
   },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-          "asar": true,
-          "name": "currency-checker"
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "pbfapp"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
+  "build": {
+    "appId": "pbfapp",
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "mac": {
+      "category": "1"
+    },
+    "win": {
+      "target":[
+        "nsis",
+        "msi"
       ]
-    }
+    },
+    "files": ["resources/*"]
   }
 }

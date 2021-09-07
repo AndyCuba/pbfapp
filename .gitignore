@@ -12,6 +12,7 @@
 /build
 /out 
 /.vscode
+/release
 
 # misc
 .DS_Store
